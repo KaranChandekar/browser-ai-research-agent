@@ -1,4 +1,4 @@
-import { streamText, stepCountIs, convertToModelMessages } from "ai";
+import { streamText, convertToModelMessages } from "ai";
 import { google } from "@ai-sdk/google";
 import { allTools } from "@/lib/tools";
 
@@ -10,7 +10,7 @@ export async function POST(req: Request) {
   const result = streamText({
     model: google("gemini-2.5-flash"),
     tools: allTools,
-    stopWhen: stepCountIs(12),
+    maxSteps: 12,
     system: `You are an expert research agent. Given a research question, you autonomously search the web, read sources, analyze their credibility, and synthesize findings into a comprehensive report.
 
 ## Your Process
